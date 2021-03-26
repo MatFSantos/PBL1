@@ -1,17 +1,17 @@
 /*
  *
  * Componente Curricular: TEC-499 MI- Sistemas Digitais, Turma TP01
- * Autor: JosÈ Gabriel Gomes dos Santos Oliveira, Mateus Fernandes Santos e Thiago Cardozo de Jesus
+ * Autor: Jos√© Gabriel Gomes dos Santos Oliveira, Mateus Fernandes Santos e Thiago Cardozo de Jesus
  * Data: 19/03/2021
  *
- * Declaro que este cÛdigo foi elaborado por mim de forma individual e
- * n„o contÈm nenhum trecho de cÛdigo de outro colega ou de outro autor, 
- * tais como provindos de livros e apostilas, e p·ginas ou documentos 
- * eletrÙnicos da Internet. Qualquer trecho de cÛdigo de outra autoria que
- * uma citaÁ„o para o  n„o a minha est· destacado com  autor e a fonte do
- * cÛdigo, e estou ciente que estes trechos n„o ser„o considerados para fins
- * de avaliaÁ„o. Alguns trechos do cÛdigo podem coincidir com de outros
- * colegas pois estes foram discutidos em sessıes tutorias.
+ * Declaro que este c√≥digo foi elaborado por mim de forma individual e
+ * n√£o cont√©m nenhum trecho de c√≥digo de outro colega ou de outro autor, 
+ * tais como provindos de livros e apostilas, e p√°ginas ou documentos 
+ * eletr√¥nicos da Internet. Qualquer trecho de c√≥digo de outra autoria que
+ * uma cita√ß√£o para o  n√£o a minha est√° destacado com  autor e a fonte do
+ * c√≥digo, e estou ciente que estes trechos n√£o ser√£o considerados para fins
+ * de avalia√ß√£o. Alguns trechos do c√≥digo podem coincidir com de outros
+ * colegas pois estes foram discutidos em sess√µes tutorias.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -90,7 +90,7 @@ int **multMatriz(int **A, int **B, int tamA[2], int tamB[2]){
 	
 Parametros:
 ** A = primeira matriz da multiplicacao;
-** B = segunda matriz da multiplica√ß√£o;
+** B = segunda matriz da multiplica√É¬ß√É¬£o;
 tamA[2] = dimensoes da matriz A;
 tamB[2] = dimensoes da matriz B.
 
@@ -127,44 +127,44 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 		"mov DWORD PTR[rbp-4],0\n" //i
 		"mov DWORD PTR[rbp-8],0\n" //j
 		"mov DWORD PTR[rbp-12],0\n" //k
-       	"LOOP1:\n" //rotulo do loop1
-        	"cmp [rbp-4], esi\n"    //compara i com tam
-        	"jge ENDLOOP1\n" //se i>= tam salta para o final de ENDLOOP1
-        	"LOOP2:\n" //rotulo do loop2
-            	"cmp [rbp-8], esi\n"    //compara j com tam
-        		"jge ENDLOOP2\n" //se j>= tam salta para o ENDLOOP2
-        		"LOOP3:\n" //rotulo do loop3 
-                 	"cmp [rbp-12], esi\n"    //compara k com tam
-         			"jge ENDLOOP3\n" //se k >= tam salta para o ENDLOOP3
-				
+       		"LOOP1:\n" //rotulo do loop1
+        		"cmp [rbp-4], esi\n"    //compara i com tam
+        		"jge ENDLOOP1\n" //se i>= tam salta para o final de ENDLOOP1
+        		"LOOP2:\n" //rotulo do loop2
+            			"cmp [rbp-8], r8d\n"    //compara j com tam
+        			"jge ENDLOOP2\n" //se j>= tam salta para o ENDLOOP2
+        			"LOOP3:\n" //rotulo do loop3 
+                 			"cmp [rbp-12], edi\n"    //compara k com tam
+         				"jge ENDLOOP3\n" //se k >= tam salta para o ENDLOOP3
+					
 					"mov ebx,[rbp-4]\n" //ebx recebe i
-            		"mov r9d,[rdx+8*rbx]\n"//r9d e um endereco de A[i][]
-           			"mov r11d,[rax+8*rbx]\n"//r11d e um endereco de C[i][]
-               			 
-            		"mov ebx,[rbp-12]\n"  //ebx recebe k           
+            				"mov r9d,[rdx+8*rbx]\n"//r9d e um endereco de A[i][]
+           				"mov r11d,[rax+8*rbx]\n"//r11d e um endereco de C[i][]
+               				 
+            				"mov ebx,[rbp-12]\n"  //ebx recebe k           
 					"mov r10d,[rcx+8*rbx]\n" //r10d e um endereco de B[k][]
 					"mov r9d,[r9d+4*ebx]\n"//r9d recebe o valor de A[i][k]
                    			
 					"mov ebx,[rbp-8]\n"//ebx recebe j
-               		"mov r10d,[r10d+4*ebx]\n" //recebe valor B[k][j]
+               				"mov r10d,[r10d+4*ebx]\n" //recebe valor B[k][j]
                 
 					"imul r10d,r9d\n" //r10d = r10d*r9d    //r10d = A[i][k]*B[k][j]
 					"add [r11d+4*ebx],r10d\n" // C[i][j] = C[i][j] + r10d
                     
 					"inc DWORD PTR[rbp-12]\n"        //incremente k
 					"jmp LOOP3\n" //Salta para o rotulo LOOP3
-		 		"ENDLOOP3:\n" //Rotulo ENDLOOP3
-            	"inc DWORD PTR[rbp-8]\n"            //incrementa j
-            	"mov DWORD PTR[rbp-12], 0\n"        //zera k
+				"ENDLOOP3:\n" //Rotulo ENDLOOP3
+            		"inc DWORD PTR[rbp-8]\n"            //incrementa j
+            		"mov DWORD PTR[rbp-12], 0\n"        //zera k
         		"jmp LOOP2\n" //Salta para o rotulo LOOP2
     		"ENDLOOP2:\n" //Rotulo ENDLOOP2
         	"inc DWORD PTR[rbp-4]\n"                // incrementa i
     		"mov DWORD PTR[rbp-8], 0\n"                //zera j
     		"jmp LOOP1\n" //Salta para o rotulo LOOP1
 		"ENDLOOP1:\n" //Rotulo ENDLOOP1
-        "pop rbp\n"
-        : [saida] "+r" (C) //C È armazenado em rax
-        : "r" (A), "r" (B), "r" (tamA[0]) // o A È armazenado em rdx, o B em rcx e o tamA[0] em esi
+        	"pop rbp\n"
+        	: [saida] "+r" (C) //C √© armazenado em rax
+        	: "r" (A), "r" (B), "r" (tamA[0]), "r" (tamA[1]), "r" (tamB[1]) // o A √© armazenado em rdx, o B em rcx, o tamA[0] em esi, tamA[1] edi e tamB[1] em r8d
 		);
 		//captura o tempo do clock do processador no fim da multiplicacao
 		clock_t end = clock();
@@ -185,14 +185,14 @@ int **multMatrizASM(int **A, int **B, int tamA[2], int tamB[2]){
 
 /*
 	Funcao para leitura de uma matriz em um arquivo .txt com layout pre-
-definido. O layout do arquivo foi idealizado pelo grupo Jos√© Gabriel,
+definido. O layout do arquivo foi idealizado pelo grupo Jos√É¬© Gabriel,
 Mateus Fernandes e Thiago Cardozo.
 
 Parametros:
 *fp = ponteiro do arquivo que sera lido, ja aberto e definido como leitura;
-*lin = quantidade de linhas da matriz que sera retornado por referencia a† 
+*lin = quantidade de linhas da matriz que sera retornado por referencia a¬† 
 quem chamou a funcao;
-*col = quantidade de colunas da matriz que sera retornado por referencia a†
+*col = quantidade de colunas da matriz que sera retornado por referencia a¬†
 quem chamou a funcao.
 
 retorno:
@@ -206,7 +206,7 @@ int** matrixReader( FILE *fp, int * lin, int * col){
 	
 	//instancia matriz com as dimensoes adquiridas.
 	int **matrix = (int**) malloc(sizeof(int*)*(*lin));
-	for( i = 0; i<(*col); i++){
+	for( i = 0; i<(*lin); i++){
 		matrix[i] = (int*) malloc(sizeof(int)*(*col));
 	}
 	
@@ -226,7 +226,7 @@ O layout do arquivo foi idealizado pelo grupo Jose Gabriel, Mateus Fernandes e T
 
 Parametros:
 ** A = matriz que sere escrita no arquivo;
-tam[2] = dimens√µes da matriz A.
+tam[2] = dimens√É¬µes da matriz A.
 
 Retorno:
 1 - caso a escrita do arquivo tenha sido efetuada;
