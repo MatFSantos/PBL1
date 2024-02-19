@@ -8,5 +8,5 @@ Com essa comparação queremos observar que, ao deixar o compilador gerar seu pr
 - Autor: José Gabriel Gomes dos Santos Oliveira, Mateus Fernandes Santos e Thiago Cardozo de Jesus
 - Data: 19/03/2021
 
-Declaro que este código foi elaborado por mim, e pelos demais componentes do grupo, de forma individual e não contém nenhum trecho de código de outro autor, tais como provindos de livros e apostilas, e páginas ou documentos eletrônicos da Internet.
+- Declaro que este código foi elaborado por mim, e pelos demais componentes do grupo, de forma individual e não contém nenhum trecho de código de outro autor, tais como provindos de livros e apostilas, e páginas ou documentos eletrônicos da Internet.
 Qualquer trecho de código de outra autoria que uma citação para o mesmo está destacado com  autor e a fonte do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
